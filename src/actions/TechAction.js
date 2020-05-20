@@ -1,4 +1,4 @@
-import { SET_LOADING, ERROR_LOGS, GET_TECHS, ADD_TECHS } from './types';
+import { SET_LOADING, ERROR_LOGS, GET_TECHS, ADD_TECHS, DELETE_TECHS } from './types';
 
 
 export const getTechs = () =>
@@ -47,6 +47,32 @@ export const getTechs = () =>
             })
         }
     }
+
+    export const deleteTechs =(techniId)=>
+    async dispatch => {
+        try{
+            console.log("TechninicianId", techniId)
+            const requestedOptions = {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(techniId)
+            };
+        
+            const url = `http://localhost:5000/techs/${techniId.techniId}`;
+            const result  = await fetch(url, requestedOptions)
+           const data = await result.json();
+        console.log(data,"data")
+            dispatch(getTechs())
+            
+        }
+        catch (err) {
+            console.log(err);
+            dispatch({
+                type: ERROR_LOGS,
+            })
+        }
+    }
+
 
 export const setLoading = () => {
     return {

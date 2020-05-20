@@ -29,7 +29,7 @@ return(
             <p> No Logs to Display </p> :
             logs.map ((data)=>{
                 return (
-                    <LogItem log = {data}/>
+                    <LogItem logData = {data}/>
                 )
             })}
 

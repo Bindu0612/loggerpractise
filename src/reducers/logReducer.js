@@ -1,4 +1,4 @@
-import { GET_LOGS, ADD_LOGS, SET_LOADING, ERROR_LOGS, GET_TECHS, ADD_TECHS } from '../actions/types';
+import { GET_LOGS, ADD_LOGS, SET_LOADING, ERROR_LOGS, GET_TECHS, ADD_TECHS, DELETE_LOGS, DELETE_TECHS } from '../actions/types';
 const initialState = {
     logs: null,
     loading: false,
@@ -23,6 +23,11 @@ export default (state = { initialState }, action) => {
                 // logs: action.preload
             }
 
+        case DELETE_LOGS :
+            return{
+                ...state,
+            }
+
         case GET_TECHS:
             return {
                 techs: action.preload,
@@ -32,6 +37,11 @@ export default (state = { initialState }, action) => {
         case ADD_TECHS:
             return {
                 ...state
+            }
+
+        case DELETE_TECHS:
+            return{
+                ...state,
             }
 
         case SET_LOADING:
@@ -45,6 +55,8 @@ export default (state = { initialState }, action) => {
                 ...state,
                 error: "no result"
             }
+
+        
 
         default:
             return state;
