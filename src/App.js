@@ -8,6 +8,7 @@ import AddLogs from './components/Logs/AddLogs';
 // import DeleteLogs from './components/Logs/DeleteLogs'; 
 import Techs from './components/Logs/Techs';
 import AddTechs from './components/Logs/AddTechs';
+import EditLogs from './components/Logs/EditLogs';
 
 const App = () =>{
   useEffect(()=>{
@@ -31,7 +32,7 @@ const Routing = ()=> {
       <Route exact path="/Techs" component={Techs} />
       {/* <Route exact path="/DeleteLogs" component={DeleteLogs} /> */}
       <Route exact path = "/AddTechs" component = {AddTechs} />
-
+      <Route exact path = "/EditLogs/:id" component = {EditLogs} />
   </div>
     )
   }

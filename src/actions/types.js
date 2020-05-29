@@ -6,4 +6,8 @@ export const GET_TECHS = 'GET_TECHS';
 export const ADD_TECHS = 'ADD_TECHS';
 export const DELETE_LOGS = 'DELETE_LOGS';
 export const DELETE_TECHS = 'DELETE_TECHS';
+export const EDIT_LOGS = 'EDIT_LOGS';
+export const GET_SINGLE_LOG = 'GET_SINGLE_LOG';
+
+
 

@@ -1,9 +1,11 @@
-import { GET_LOGS, ADD_LOGS, SET_LOADING, ERROR_LOGS, GET_TECHS, ADD_TECHS, DELETE_LOGS, DELETE_TECHS } from '../actions/types';
+import { GET_LOGS, GET_SINGLE_LOG, ADD_LOGS, EDIT_LOGS,  DELETE_LOGS, SET_LOADING, ERROR_LOGS, GET_TECHS, ADD_TECHS, DELETE_TECHS } from '../actions/types';
 const initialState = {
     logs: null,
     loading: false,
     error: null,
-    techs: null
+    techs: null,
+    edit:false,
+    singleLog : null
 }
 
 
@@ -17,11 +19,24 @@ export default (state = { initialState }, action) => {
                 loading: false
             }
 
+        case GET_SINGLE_LOG:
+            return {
+                ...state,
+                singleLog : action.preload,
+                loading: false
+            }
+
         case ADD_LOGS:
             return {
                 ...state,
                 // logs: action.preload
             }
+
+        case EDIT_LOGS:
+            return{
+                ...state,
+                edit: true,
+            }    
 
         case DELETE_LOGS :
             return{
@@ -38,7 +53,7 @@ export default (state = { initialState }, action) => {
             return {
                 ...state
             }
-
+        
         case DELETE_TECHS:
             return{
                 ...state,

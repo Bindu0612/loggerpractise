@@ -1,5 +1,42 @@
 {
-  "logs": [],
+  "logs": [
+    {
+      "message": "hello",
+      "attention": true,
+      "tech": "Bindu",
+      "date": " 21-05-2020",
+      "id": 2,
+      "editLog": 2
+    },
+    {
+      "message": "Alert",
+      "attention": true,
+      "tech": "Manooooooooooooooooo",
+      "date": " 21-05-2020",
+      "id": 3
+    },
+    {
+      "message": "Redzone",
+      "attention": true,
+      "tech": "Anu",
+      "date": " 21-05-2020",
+      "id": 4
+    },
+    {
+      "message": "Its monday",
+      "attention": false,
+      "tech": "Shinchan1234567890",
+      "date": " 21-05-2020",
+      "id": 5
+    },
+    {
+      "message": "test",
+      "attention": true,
+      "tech": "binduuuuuuuuuuu",
+      "date": " 21-05-2020",
+      "id": 6
+    }
+  ],
   "techs": [
     {
       "firstName": "Seema",

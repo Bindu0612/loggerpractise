@@ -1,13 +1,20 @@
 import React, {useEffect} from 'react';
-import { deleteLogs } from '../../actions/logAction';
+import { deleteLogs,editLogs } from '../../actions/logAction';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+// import {EditLogs} from './EditLogs';
 
-
-const LogItem = ({logData, deleteLogs})=>{
+const LogItem = ({logData, deleteLogs, editLogs})=>{
    const deleteLog = (e)=>{
        console.log("method", logData.id)
         deleteLogs ({
             "logId" : logData.id
+        })
+    }
+
+    const editLog = ()=>{
+        editLogs ({
+            "editLog": logData.id
         })
     }
 
@@ -25,6 +32,7 @@ const LogItem = ({logData, deleteLogs})=>{
             </span><span >{logData.date}</span>
             
             <a href ='#!' className = 'secondary-content'>
+           <Link to = {`/EditLogs/${logData.id}`}> <i className = 'material-icons grey-text'> edit </i></Link>
                 <i className = 'material-icons grey-text' onClick = {deleteLog}> delete </i>
             </a>
         </li>
@@ -38,5 +46,5 @@ const mapStateToProps = (state) => {
     } 
  }
 
-export default connect (mapStateToProps, {deleteLogs})(LogItem);
+export default connect (mapStateToProps, {deleteLogs,editLogs})(LogItem);
 // export default LogItem;

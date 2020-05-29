@@ -1,4 +1,4 @@
-import { GET_LOGS, ADD_LOGS, SET_LOADING, ERROR_LOGS, DELETE_LOGS } from './types';
+import { GET_LOGS, ADD_LOGS, SET_LOADING, ERROR_LOGS, DELETE_LOGS, GET_SINGLE_LOG } from './types';
 
 export const getLogs = () =>
     async dispatch => {
@@ -48,6 +48,57 @@ export const deleteLogs = (logId) =>
             })
         }
     }
+
+export const getSingleLog = (id) =>
+        async dispatch =>{
+            try{
+                console.log(id)
+                setLoading();
+                const result  = await fetch(`http://localhost:5000/logs/${id}`)
+                const data = await result.json();
+                console.log(data.message)
+               
+                dispatch({
+                 type: GET_SINGLE_LOG,
+                 preload: data
+                })
+                }
+            catch (err) {
+                console.log(err);
+                dispatch({
+                    type: ERROR_LOGS,
+                    // preload: err.data.result
+                })
+         
+        }
+    }
+
+export const editLogs = (editLog) =>
+async dispatch => {
+    try{
+        console.log("editLog", editLog)
+        const requestedOptions = {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(editLog)
+        };
+    
+        const url = `http://localhost:5000/logs/${editLog.editLog}`;
+        const result  = await fetch(url, requestedOptions)
+        const data = await result.json();
+        console.log(data,"data")
+        dispatch(getLogs());   
+    }
+    catch (err) {
+        console.log(err);
+        dispatch({
+            type: ERROR_LOGS,
+            // preload: err.data.result
+        })
+    }
+}
+
+
 
 export const addLogs = (log) =>
     async dispatch => {
