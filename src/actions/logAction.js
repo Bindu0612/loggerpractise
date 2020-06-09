@@ -77,13 +77,17 @@ export const editLogs = (editLog) =>
 async dispatch => {
     try{
         console.log("editLog", editLog)
+        // let newData = editLog;
+        const url = `http://localhost:5000/logs/${editLog.id}`;
+        delete editLog.id;
+        console.log(editLog);
         const requestedOptions = {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(editLog)
         };
     
-        const url = `http://localhost:5000/logs/${editLog.editLog}`;
+      
         const result  = await fetch(url, requestedOptions)
         const data = await result.json();
         console.log(data,"data")

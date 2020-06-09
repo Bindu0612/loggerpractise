@@ -1,12 +1,14 @@
 import React, {useState,useEffect} from 'react';
 import {getSingleLog } from '../../actions/logAction';
 import {connect} from 'react-redux';
+import {editLogs} from '../../actions/logAction';
 
-const EditLogs = ({getSingleLog, log: {singleLog,loading}, ...props})=>{
-  
-    const [message, setMessage] = useState(null);
+const EditLogs = ({getSingleLog, log: {singleLog,loading}, editLogs, ...props})=>{
+  const [message, setMessage] = useState(null);
   const [attention, setAttention] = useState(false);
   const [tech, setTech] = useState(null);
+  const [status, setStatus] = useState(true);
+   
 //   const [id, setId] = useState(null);
 console.log(props);
 console.log(singleLog);
@@ -14,24 +16,61 @@ console.log(singleLog);
 
 
 useEffect(()=>{
-    console.log(singleLog);
-        getSingleLog(props.match.params.id)
-        console.log(getSingleLog);
-        }, [])
+    
+    if(singleLog==undefined){
+      getSingleLog(props.match.params.id)
+      console.log(singleLog);
+    } 
+    if(singleLog != undefined && status){
+     setMessage(singleLog.message)
+     setAttention(singleLog.attention)
+     setTech(singleLog.tech)
+     setStatus(false)
+     console.log(message);
+    }          
+        })
         
 
-const onSubmitHandler =()=>{
+      
+const onChangeHandler = (e) => {
+  e.preventDefault();
+  console.log(e.target);
 
+  switch (e.target.name) {
+    case "message":
+      // setMessage({ [e.target.name]: e.target.value });
+      setMessage(e.target.value);
+      break;
+
+    case "attention":
+      e.target.checked ? setAttention( true ) : setAttention( false )
+      break;
+
+    case "tech":
+      // setTech({ [e.target.name]: e.target.value });
+      setTech(e.target.value);
+      break;
+
+    // case "id":
+    //   setId({ [e.target.name]: e.target.value });
+    //   break;
+  }
 }
 
-const onChangeHandler = () =>{
+const onSubmitHandler = (e) => {
+  e.preventDefault();
+  // let date = new Date();
 
+  editLogs({
+    "message": message,
+    "attention": attention,
+    "tech": tech,
+    "id" : singleLog.id
+  })
 }
 
-if(singleLog!= undefined){
-  // setMessage({ messsage: singleLog.message })
-  // setAttention({ attention: singleLog.attention })
-  // setTech({ tech: singleLog.tech })            
+
+         
 
 return(
 
@@ -41,39 +80,43 @@ return(
 
 <div className="row">
   <div className="input-field col s6">
-    <input name="message" type="text" data-length="10"
-      value = {singleLog.message} />
-    {/* <label for="Message">Message</label> */}
+    <input name="message" onChange ={onChangeHandler} type="text" data-length="10"
+      value = {message} />
+    
   </div>
 </div>
 
 <div className="row">
   <div className="input-field col s6">
-    <input name="attention" type="text" data-length="10"
-      value = {singleLog.attention} />
-    {/* <label for="Attention">Attention</label> */}
+    <input name="attention" onChange ={onChangeHandler} type="text" data-length="10"
+      value = {attention} />
+   
+  </div>
+
+  <div>
+    <button > Update </button>
   </div>
 </div>
 
 
 <div className="row">
   <div className="input-field col s6">
-    <input name="tech" 
+    <input name="tech" onChange ={onChangeHandler}
     type="text" data-length="10"
-      value = {singleLog.tech} />
-    {/* <label for="Tech">Tech</label> */}
+      value = {tech} />
+ 
   </div>
 </div>
 </form>
 
 </div>
 ) 
-}
-else{
-  return(
-    <h2> Loading... </h2>
-  )
-}
+
+// else{
+//   return(
+//     <h2> Loading... </h2>
+//   )
+// }
 
 }
 
@@ -85,4 +128,4 @@ const mapStateToProps = (state) => {
  }
 
 
-export default connect(mapStateToProps, {getSingleLog})(EditLogs);
+export default connect(mapStateToProps, {editLogs,getSingleLog})(EditLogs);

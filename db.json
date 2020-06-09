@@ -9,21 +9,21 @@
       "editLog": 2
     },
     {
-      "message": "Alert",
+      "message": "Alert red",
       "attention": true,
-      "tech": "Manooooooooooooooooo",
+      "tech": "Manu",
       "date": " 21-05-2020",
       "id": 3
     },
     {
-      "message": "Redzone",
+      "message": "Orangezone",
       "attention": true,
       "tech": "Anu",
       "date": " 21-05-2020",
       "id": 4
     },
     {
-      "message": "Its monday",
+      "message": "Its saturday",
       "attention": false,
       "tech": "Shinchan1234567890",
       "date": " 21-05-2020",
